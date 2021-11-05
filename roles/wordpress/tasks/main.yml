@@ -1,0 +1,30 @@
+  - name: Launching MySQL Database Pod For WordPress
+    shell: "kubectl run {{ Mysql_pod_name }} --image={{ mysql_image }} --env=MYSQL_ROOT_PASSWORD={{ MYSQL_ROOT_PASS }}  --env=MYSQL_DATABASE={{ MYSQL_DB }}  --env=MYSQL_USER={{ MYSQL_USER }}  --env=MYSQL_PASSWORD={{ mysql_pass }}"
+    register: sql
+
+  - debug:
+     var: sql.stdout_lines
+
+  - name: Launching WordPress App  
+    shell: "kubectl run  {{ Wordpress_pod_name }}  --image={{ Wordpress_image }}"
+    register: wp
+
+  - debug:
+     var: wp.stdout_lines
+
+
+  - name: Exposing wordpess Pod
+    shell: "kubectl expose pod  {{ Wordpress_pod_name }} --type=NodePort --port={{ expose_port }}"
+    register: expose
+    ignore_errors: yes
+
+  - debug: 
+     var: expose.stdout_lines
+
+  - name: Showing K8S Services
+    shell: "kubectl get svc"
+    register: svc
+
+  - debug:
+          var: svc.stdout
+          # var: svc.stdout_lines

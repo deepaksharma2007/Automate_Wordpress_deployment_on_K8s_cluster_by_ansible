@@ -1,0 +1,9 @@
+- hosts: localhost
+  vars_files:
+          - vault.yml
+  roles:
+          - role: /root/TASK-23/roles/provisioning
+           
+           
+           
+

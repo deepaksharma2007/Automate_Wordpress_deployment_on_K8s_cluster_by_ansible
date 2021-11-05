@@ -1,0 +1,15 @@
+---
+# vars file for wordpress
+mysql_image: mysql:5.7
+MYSQL_ROOT_PASS: myroot
+
+MYSQL_DB: mydb
+MYSQL_USER: deepak
+mysql_pass: redhat
+
+Mysql_pod_name: mypod
+Wordpress_pod_name: wppod
+Wordpress_image: wordpress:5.1.1-php7.3-apache
+expose_port: 80
+
+

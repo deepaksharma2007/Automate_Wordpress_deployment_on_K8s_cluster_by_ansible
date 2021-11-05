@@ -1,0 +1,20 @@
+- name: To configure Master Node 
+  hosts: k8s-Master
+  vars_files:
+         - vault.yml
+  roles:
+         - role: /root/TASK-23/roles/ec2_k8s_master
+
+- name: To configure Slave Node 
+  hosts: k8s-Slave
+  vars_files:
+          - vault.yml
+  roles:
+          - role: /root/TASK-23/roles/ec2_k8s_slave
+
+          
+- name: To Launch Wordpress & Mysql POd in K8S Cluster 
+  hosts: k8s-Master
+  roles:
+         - role: /root/TASK-23/roles/wordpress
+
